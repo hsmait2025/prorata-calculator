@@ -1,55 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2980b9">
-
-  <title>Pro-Rata by FY and Month with Export</title>
+  <meta charset="UTF-8">
+  <title>Pro-Rata Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial;
-      margin: 40px;
-      background: #f4f4f4;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      margin: 0;
+      padding: 40px 20px;
+      color: #333;
     }
-    input, button {
-      padding: 8px;
-      font-size: 14px;
-      margin: 10px 0;
-      width: 250px;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 15px;
+
+    .container {
+      max-width: 600px;
+      margin: auto;
       background: #fff;
-      border-left: 4px solid #007acc;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
     label {
+      font-weight: 600;
+      margin-top: 20px;
       display: block;
-      margin-top: 15px;
+      color: #34495e;
     }
+
+    input[type="date"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 15px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    .button-row {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 15px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fdfdfd;
+      border-left: 5px solid #2980b9;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    strong {
+      color: #2c3e50;
+    }
+
     h3 {
       margin-top: 25px;
-      color: #007acc;
+      color: #2c3e50;
+      font-size: 18px;
+    }
+
+    @media (max-width: 500px) {
+      .button-row {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h2>Prorated Amount Split by Financial Year and Month</h2>
+  <div class="container">
+    <h2>💸 Pro-Rata Calculator</h2>
 
-  <label>Start Date:</label>
-  <input type="date" id="startDate">
+    <label for="startDate">Start Date</label>
+    <input type="date" id="startDate">
 
-  <label>End Date:</label>
-  <input type="date" id="endDate">
+    <label for="endDate">End Date</label>
+    <input type="date" id="endDate">
 
-  <label>Total Amount (₹):</label>
-  <input type="number" id="totalAmount" placeholder="Enter total amount">
+    <label for="totalAmount">Total Amount (₹)</label>
+    <input type="number" id="totalAmount" placeholder="Enter total amount">
 
-  <button onclick="calculateProrata()">Calculate</button>
-  <button onclick="downloadCSV()">Download CSV</button>
+    <div class="button-row">
+      <button onclick="calculateProrata()">Calculate</button>
+      <button onclick="downloadCSV()">Download CSV</button>
+    </div>
 
-  <div class="result" id="result"></div>
+    <div class="result" id="result"></div>
+  </div>
 
   <script>
     let csvRows = [];
@@ -87,7 +165,6 @@
       csvRows.push(["One Day Amount", oneDayAmount.toFixed(2)]);
       csvRows.push([]);
 
-      // === Financial Year Split ===
       output += `<h3>🔹 Financial Year Breakdown</h3>`;
       csvRows.push(["Financial Year", "Days", "Amount"]);
 
@@ -111,7 +188,6 @@
         currentFYStartYear += 1;
       }
 
-      // === Month-wise Breakdown ===
       output += `<h3>📅 Month-wise Breakdown</h3>`;
       csvRows.push([]);
       csvRows.push(["Month", "Year", "Days", "Amount"]);
