@@ -1,79 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2980b9">
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2980b9" />
+  <link rel="manifest" href="manifest.json" />
   <title>Pro-Rata Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
+      margin: 0;
+      padding: 20px;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #eef2f3, #8e9eab);
-      margin: 0;
-      padding: 40px 20px;
       color: #333;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 480px;
       margin: auto;
       background: #fff;
-      padding: 30px 40px;
+      padding: 24px;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
 
     h2 {
       text-align: center;
+      margin-bottom: 24px;
       color: #2c3e50;
-      margin-bottom: 30px;
+      font-size: 20px;
     }
 
     label {
       font-weight: 600;
-      margin-top: 20px;
+      margin-top: 16px;
       display: block;
-      color: #34495e;
     }
 
-    input[type="date"],
-    input[type="number"] {
+    input {
       width: 100%;
-      padding: 10px 14px;
-      font-size: 15px;
-      margin-top: 8px;
-      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 16px;
+      margin-top: 6px;
       border: 1px solid #ccc;
-      transition: border-color 0.3s ease;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: #3498db;
+      border-radius: 8px;
     }
 
     .button-row {
-      margin-top: 25px;
+      margin-top: 24px;
       display: flex;
-      justify-content: space-between;
-      gap: 15px;
+      flex-direction: column;
+      gap: 12px;
     }
 
     button {
-      flex: 1;
       padding: 12px;
-      font-size: 15px;
-      background: #3498db;
-      color: #fff;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
+      background: #3498db;
+      color: #fff;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
 
     button:hover {
@@ -81,45 +73,45 @@
     }
 
     .result {
-      margin-top: 30px;
-      padding: 20px;
+      margin-top: 24px;
+      padding: 16px;
       background: #fdfdfd;
-      border-left: 5px solid #2980b9;
+      border-left: 4px solid #2980b9;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.6;
     }
 
-    strong {
-      color: #2c3e50;
-    }
-
     h3 {
-      margin-top: 25px;
+      margin-top: 20px;
       color: #2c3e50;
-      font-size: 18px;
+      font-size: 16px;
     }
 
-    @media (max-width: 500px) {
+    @media (min-width: 600px) {
       .button-row {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      button {
+        flex: 1;
       }
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h2>💸 Pro-Rata Calculator</h2>
+    <h2>📆 Pro-Rata Calculator</h2>
 
     <label for="startDate">Start Date</label>
-    <input type="date" id="startDate">
+    <input type="date" id="startDate" />
 
     <label for="endDate">End Date</label>
-    <input type="date" id="endDate">
+    <input type="date" id="endDate" />
 
     <label for="totalAmount">Total Amount (₹)</label>
-    <input type="number" id="totalAmount" placeholder="Enter total amount">
+    <input type="number" id="totalAmount" placeholder="Enter total amount" />
 
     <div class="button-row">
       <button onclick="calculateProrata()">Calculate</button>
@@ -231,13 +223,6 @@
       link.click();
       document.body.removeChild(link);
     }
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-    .then(() => console.log("✅ Service Worker Registered"))
-    .catch(err => console.error("❌ Service Worker Error", err));
-}
-  
-</script>
-
+  </script>
 </body>
 </html>
